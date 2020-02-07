@@ -1,5 +1,5 @@
-const expreess = require('express');
-const routes = require('./routes');
+import expreess from 'express';
+import routes from './routes';
 
 
 class App {
@@ -19,4 +19,4 @@ class App {
   }
 }
 
-module.exports = new App().server;
+export default new App().server;
