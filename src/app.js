@@ -1,4 +1,5 @@
 import expreess from 'express';
+import path from 'path';
 import routes from './routes';
 
 import './database';
@@ -13,6 +14,9 @@ class App {
 
   middlewares() {
     this.server.use(expreess.json());
+    this.server.use(
+      '/files',
+      expreess.static(path.resolve(__dirname, '..', 'tmp', 'uploads')))
   }
 
   routes() {

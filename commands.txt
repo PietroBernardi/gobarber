@@ -1,5 +1,99 @@
-yarn add multer
 
+
+Adicionar no arquivo package.json
+
+"scripts": {
+    "dev": "nodemon index.js"
+  },
+
+yarn dev vai executar o index e vai atualizar a cada alteração
+
+4- docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+docker run --name mongobarber -p 27017:27017 -d -t mongo
+criar base postgres
+
+*docker ps -a LISTA TODOS OS CONTAINERS
+*docker container rm ed4914df84ff remover container
+
+5-docker ps
+lista os container ativos
+
+6- yarn add eslint
+padrao de codigos fontes
+
+7- yarn eslint --init
+criar arquivo de inicialização
+
+8-yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+deixa o codigo mais legivel
+
+9-yarn eslint --fix src --ext .js
+
+10 yarn add sequelize
+
+11 yarn add sequelize-cli -D
+
+12 yarn add pg pg-hstore
+
+13 yarn sequelize db:migrate
+CRIAS AS TABELAS NO BANCO DE DADOS DAS MIGRATIONS
+
+13.5 yarn sequelize migration:create --name=create-recipient
+
+13.6 yarn db:migrate:undo:all DESFAZ TODAS AS MIGRATIONS
+
+14 yarn add bcryptjs
+criar criptografia de senhas
+
+15 yarn add jsonwebtoken
+cria token JWT
+
+16 yarn add yup
+biblioteca de validação
+
+17yarn sequelize seed:generate --name admin-user
+CRIA UM SEED DE USUARIO ADM
+
+const bcrypt = require("bcryptjs");
+
+src/database/seeds
+
+module.exports = {
+  up: QueryInterface => {
+    return QueryInterface.bulkInsert(
+      "users",
+      [
+        {
+          name: "Distribuidora FastFeet",
+          email: "admin@fastfeet.com",
+          password_hash: bcrypt.hashSync("123456", 8),
+          created_at: new Date(),
+          updated_at: new Date()
+        }
+      ],
+      {}
+    );
+  },
+
+  down: () => {}
+};
+
+yarn sequelize db:seed:all
+
+18 yarn add multer
+trabalhar com upload de fotos
+
+// Desafio 2 - FastFeet
 yarn sequelize migration:create --name=create-files
 // Ajustar a tabela files
 yarn sequelize db:migrate
+
+yarn sequelize migration:create --name=create-appointments
+// Ajustar a tabela appointments
+yarn sequelize db:migrate
+
+// Trabalhar com datas no node
+yarn add date-fns@next
+
+//Conexao com mongoDb
+yarn add mongoose
