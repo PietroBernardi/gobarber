@@ -97,3 +97,7 @@ yarn add date-fns@next
 
 //Conexao com mongoDb
 yarn add mongoose
+
+//biblioteca para envio de email
+yarn add nodemailer
+
