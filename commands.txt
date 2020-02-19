@@ -101,3 +101,14 @@ yarn add mongoose
 //biblioteca para envio de email
 yarn add nodemailer
 
+// Tamplates email
+yarn add express-handlebars nodemailer-express-handlebars
+
+// Bee-queue para utilizar filas (performatico)
+yarn add bee-queue
+
+//SENTRY ferramenta para monitoramento de erros:
+yarn add @sentry/node@5.12.2
+
+ // agora se faz necessario instalar essa extensao:
+ yarn add express-async-errors

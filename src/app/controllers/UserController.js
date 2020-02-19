@@ -10,7 +10,7 @@ class UserController {
         .required(),
       password: Yup.string()
         .required()
-        .min(6),
+        .min(6)
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -30,7 +30,7 @@ class UserController {
       id,
       name,
       email,
-      provider,
+      provider
     });
   }
 
@@ -41,8 +41,12 @@ class UserController {
       oldPassword: Yup.string().min(6),
       password: Yup.string()
         .min(6)
-        .when('oldPassword', (oldPassword, field) => (oldPassword ? field.required() : field)),
-      confirmPassword: Yup.string().when('password', (password, field) => (password ? field.required().oneOf([Yup.ref('password')]) : field)),
+        .when('oldPassword', (oldPassword, field) =>
+          oldPassword ? field.required() : field
+        ),
+      confirmPassword: Yup.string().when('password', (password, field) =>
+        password ? field.required().oneOf([Yup.ref('password')]) : field
+      )
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -71,7 +75,7 @@ class UserController {
       id,
       name,
       email,
-      provider,
+      provider
     });
   }
 }

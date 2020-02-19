@@ -4,7 +4,9 @@ import User from '../models/User';
 import File from '../models/File';
 import Appointment from '../models/Appointment';
 import Notification from '../schemas/Notification';
-import Mail from '../../lib/mail';
+
+import CancellationMail from '../jobs/CancellationMail';
+import Queue from '../../lib/Queue';
 
 class AppointmentController {
   async index(req, res) {
@@ -15,7 +17,7 @@ class AppointmentController {
       order: ['date'],
       limit: 20,
       offset: (page - 1) * 20,
-      attributes: ['id', 'date'],
+      attributes: ['id', 'date', 'past', 'cancelable'],
       include: [
         {
           model: User,
@@ -119,6 +121,11 @@ class AppointmentController {
           model: User,
           as: 'provider',
           attributes: ['name', 'email']
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name']
         }
       ]
     });
@@ -140,10 +147,8 @@ class AppointmentController {
 
     await appointment.save();
 
-    await Mail.sendMail({
-      to: `${appointment.provider.name} <${appointment.provider.email}`,
-      subject: `Appointment canceled.`,
-      text: `You have a new canceled appointment`
+    await Queue.add(CancellationMail.key, {
+      appointment
     });
 
     return res.json(appointment);
